@@ -1,0 +1,489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{78B2FFA4-9867-407D-AA75-85F00D0D5AFC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WpfConversation</RootNamespace>
+    <AssemblyName>WpfConversation</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ContentType.cs" />
+    <Compile Include="TabImg.cs" />
+    <Compile Include="BtnImg.cs" />
+    <Compile Include="ImgWindow.xaml.cs">
+      <DependentUpon>ImgWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs" />
+    <Compile Include="View\BottomUserControl.xaml.cs">
+      <DependentUpon>BottomUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MiddleEmoticonControl.xaml.cs">
+      <DependentUpon>MiddleEmoticonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MiddleMyEmoticon.xaml.cs">
+      <DependentUpon>MiddleMyEmoticon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MiddleMyUserControl.xaml.cs">
+      <DependentUpon>MiddleMyUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MiddleUserControl.xaml.cs">
+      <DependentUpon>MiddleUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\MyImgUserControl.xaml.cs">
+      <DependentUpon>MyImgUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TopUserControl.xaml.cs">
+      <DependentUpon>TopUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\YourImgUserControl.xaml.cs">
+      <DependentUpon>YourImgUserControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="ImgWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="View\BottomUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MiddleEmoticonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MiddleMyEmoticon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MiddleMyUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MiddleUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\MyImgUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TopUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\YourImgUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include=".editorconfig" />
+    <None Include=".editorconfig.inferred" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\btn_cal_down.png" />
+    <Resource Include="img\btn_cal_normal.png" />
+    <Resource Include="img\ico_sch_dis.png" />
+    <Resource Include="img\ico_sch_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\ico_sch_normal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\btn-chat-notice-click.png" />
+    <Resource Include="img\btn-chat-notice-hover.png" />
+    <Resource Include="img\btn-chat-notice-normal.png" />
+    <Resource Include="img\btn-ico-drawer-click.png" />
+    <Resource Include="img\btn-ico-drawer-normal.png" />
+    <Resource Include="img\btn-ico-drawer-over.png" />
+    <Resource Include="img\btn-ico-panel-close-click.png" />
+    <Resource Include="img\btn-ico-panel-close-normal.png" />
+    <Resource Include="img\btn-ico-panel-close-normal_2.png" />
+    <Resource Include="img\btn-ico-panel-close-over.png" />
+    <Resource Include="img\btn_ico_allreply_down.png" />
+    <Resource Include="img\btn_ico_allreply_normal.png" />
+    <Resource Include="img\btn_ico_bookmarkoff_down.png" />
+    <Resource Include="img\btn_ico_bookmarkoff_normal.png" />
+    <Resource Include="img\btn_ico_bookmarkoff_over.png" />
+    <Resource Include="img\btn_ico_chet_normal.png" />
+    <Resource Include="img\btn_ico_delet_down.png" />
+    <Resource Include="img\btn_ico_delet_normal.png" />
+    <Resource Include="img\btn_ico_delivery_down.png" />
+    <Resource Include="img\btn_ico_delivery_normal.png" />
+    <Resource Include="img\btn_ico_downloadfolder_dis.png" />
+    <Resource Include="img\btn_ico_downloadfolder_down.png" />
+    <Resource Include="img\btn_ico_downloadfolder_normal.png" />
+    <Resource Include="img\btn_ico_dwfolder_down.png" />
+    <Resource Include="img\btn_ico_dwfolder_normal.png" />
+    <Resource Include="img\btn_ico_dwfolder_over.png" />
+    <Resource Include="img\btn_ico_favorite_cancel_dis.png" />
+    <Resource Include="img\btn_ico_favorite_cancel_down.png" />
+    <Resource Include="img\btn_ico_favorite_cancel_normal.png" />
+    <Resource Include="img\btn_ico_favorite_dis.png" />
+    <Resource Include="img\btn_ico_favorite_down.png" />
+    <Resource Include="img\btn_ico_favorite_normal.png" />
+    <Resource Include="img\btn_ico_fileview_down.png" />
+    <Resource Include="img\btn_ico_fileview_normal.png" />
+    <Resource Include="img\btn_ico_fileview_over.png" />
+    <Resource Include="img\btn_ico_kiss_down.png" />
+    <Resource Include="img\btn_ico_kiss_normal.png" />
+    <Resource Include="img\btn_ico_kiss_over.png" />
+    <Resource Include="img\btn_ico_ladder_down.png" />
+    <Resource Include="img\btn_ico_ladder_normal.png" />
+    <Resource Include="img\btn_ico_ladder_over.png" />
+    <Resource Include="img\btn_ico_mess_down.png" />
+    <Resource Include="img\btn_ico_mess_normal.png" />
+    <Resource Include="img\btn_ico_mess_over.png" />
+    <Resource Include="img\btn_ico_print_down.png" />
+    <Resource Include="img\btn_ico_print_normal.png" />
+    <Resource Include="img\btn_ico_repeat_dis.png" />
+    <Resource Include="img\btn_ico_repeat_down.png" />
+    <Resource Include="img\btn_ico_repeat_normal.png" />
+    <Resource Include="img\btn_ico_reply_down.png" />
+    <Resource Include="img\btn_ico_reply_normal.png" />
+    <Resource Include="img\btn_ico_tchet_normal.png" />
+    <Resource Include="img\btn_ico_videotel_down.png" />
+    <Resource Include="img\btn_ico_videotel_normal.png" />
+    <Resource Include="img\btn_ico_videotel_over.png" />
+    <Resource Include="img\btn_left_search_normal.png" />
+    <Resource Include="img\btn_renew_down.png" />
+    <Resource Include="img\btn_renew_normal.png" />
+    <Resource Include="img\btn_renew_over.png" />
+    <Resource Include="img\ico_book.png" />
+    <Resource Include="img\ico_building.png" />
+    <Resource Include="img\ico_cake.png" />
+    <Resource Include="img\ico_com.png" />
+    <Resource Include="img\ico_face_down.png" />
+    <Resource Include="img\ico_face_normal.png" />
+    <Resource Include="img\ico_face_over.png" />
+    <Resource Include="img\ico_fax.png" />
+    <Resource Include="img\ico_file_down.png" />
+    <Resource Include="img\ico_file_normal.png" />
+    <Resource Include="img\ico_file_over.png" />
+    <Resource Include="img\ico_fontsize_down.png" />
+    <Resource Include="img\ico_fontsize_normal.png" />
+    <Resource Include="img\ico_log_on.png" />
+    <Resource Include="img\ico_mail.png" />
+    <Resource Include="img\ico_mail_dis.png" />
+    <Resource Include="img\ico_mail_down.png" />
+    <Resource Include="img\ico_mail_normal.png" />
+    <Resource Include="img\ico_man.png" />
+    <Resource Include="img\ico_mess_dis.png" />
+    <Resource Include="img\ico_mess_down.png" />
+    <Resource Include="img\ico_mess_normal.png" />
+    <Resource Include="img\ico_mygroup_dis.png" />
+    <Resource Include="img\ico_mygroup_down.png" />
+    <Resource Include="img\ico_mygroup_normal.png" />
+    <Resource Include="img\ico_phone.png" />
+    <Resource Include="img\ico_profile_dis.png" />
+    <Resource Include="img\ico_setting_dis.png" />
+    <Resource Include="img\ico_setting_down.png" />
+    <Resource Include="img\ico_setting_normal.png" />
+    <Resource Include="img\ico_tele.png" />
+    <Resource Include="img\profile-cal-click.png" />
+    <Resource Include="img\profile-cal-none.png" />
+    <Resource Include="img\profile-cal-over.png" />
+    <Resource Include="img\profile-kiss-click.png" />
+    <Resource Include="img\profile-kiss-none.png" />
+    <Resource Include="img\profile-kiss-over.png" />
+    <Resource Include="img\profile-mail-click.png" />
+    <Resource Include="img\profile-mail-none.png" />
+    <Resource Include="img\profile-mail-over.png" />
+    <Resource Include="img\profile-report-click.png" />
+    <Resource Include="img\profile-report-none.png" />
+    <Resource Include="img\profile-report-over.png" />
+    <Resource Include="img\김병준프로필.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\ico_join_down.png" />
+    <Resource Include="img\ico_join_normal.png" />
+    <Resource Include="img\ico_join_over.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\messenger_label_day.png" />
+    <Resource Include="img\messenger_label_today.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\img_msg_from_br.png" />
+    <Resource Include="img\img_msg_from_tl.png" />
+    <Resource Include="img\img_msg_from_tr.png" />
+    <Resource Include="img\img_msg_to_bl.png" />
+    <Resource Include="img\img_msg_to_br.png" />
+    <Resource Include="img\img_msg_to_tl.png" />
+    <Resource Include="img\img_msg_to_tr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\img_msg_from_bl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\001-01.png" />
+    <Resource Include="img\001-01_en.png" />
+    <Resource Include="img\001-02.png" />
+    <Resource Include="img\001-02_en.png" />
+    <Resource Include="img\001-03.png" />
+    <Resource Include="img\001-04.png" />
+    <Resource Include="img\001-05.png" />
+    <Resource Include="img\001-06.png" />
+    <Resource Include="img\001-07.png" />
+    <Resource Include="img\001-08.png" />
+    <Resource Include="img\001-09.png" />
+    <Resource Include="img\001-10.png" />
+    <Resource Include="img\001-11.png" />
+    <Resource Include="img\001-12.png" />
+    <Resource Include="img\001-13.png" />
+    <Resource Include="img\001-14.png" />
+    <Resource Include="img\001-15.png" />
+    <Resource Include="img\001-16.png" />
+    <Resource Include="img\001-17.png" />
+    <Resource Include="img\001-18.png" />
+    <Resource Include="img\001-19.png" />
+    <Resource Include="img\001-20.png" />
+    <Resource Include="img\002-01.png" />
+    <Resource Include="img\002-02.png" />
+    <Resource Include="img\002-03.png" />
+    <Resource Include="img\002-04.png" />
+    <Resource Include="img\002-05.png" />
+    <Resource Include="img\002-06.png" />
+    <Resource Include="img\002-07.png" />
+    <Resource Include="img\002-08.png" />
+    <Resource Include="img\002-09.png" />
+    <Resource Include="img\002-10.png" />
+    <Resource Include="img\002-11.png" />
+    <Resource Include="img\002-12.png" />
+    <Resource Include="img\002-13.png" />
+    <Resource Include="img\002-14.png" />
+    <Resource Include="img\002-15.png" />
+    <Resource Include="img\002-16.png" />
+    <Resource Include="img\002-17.png" />
+    <Resource Include="img\002-18.png" />
+    <Resource Include="img\002-19.png" />
+    <Resource Include="img\002-20.png" />
+    <Resource Include="img\003-01.png" />
+    <Resource Include="img\003-02.png" />
+    <Resource Include="img\003-03.png" />
+    <Resource Include="img\003-04.png" />
+    <Resource Include="img\003-05.png" />
+    <Resource Include="img\003-06.png" />
+    <Resource Include="img\003-07.png" />
+    <Resource Include="img\003-08.png" />
+    <Resource Include="img\003-09.png" />
+    <Resource Include="img\003-10.png" />
+    <Resource Include="img\003-11.png" />
+    <Resource Include="img\003-12.png" />
+    <Resource Include="img\003-13.png" />
+    <Resource Include="img\003-14.png" />
+    <Resource Include="img\003-15.png" />
+    <Resource Include="img\003-16.png" />
+    <Resource Include="img\003-17.png" />
+    <Resource Include="img\003-18.png" />
+    <Resource Include="img\003-19.png" />
+    <Resource Include="img\003-20.png" />
+    <Resource Include="img\004-01.png" />
+    <Resource Include="img\004-02.png" />
+    <Resource Include="img\004-03.png" />
+    <Resource Include="img\004-04.png" />
+    <Resource Include="img\004-05.png" />
+    <Resource Include="img\004-06.png" />
+    <Resource Include="img\004-07.png" />
+    <Resource Include="img\004-08.png" />
+    <Resource Include="img\004-09.png" />
+    <Resource Include="img\004-10.png" />
+    <Resource Include="img\004-11.png" />
+    <Resource Include="img\004-12.png" />
+    <Resource Include="img\004-13.png" />
+    <Resource Include="img\004-14.png" />
+    <Resource Include="img\004-15.png" />
+    <Resource Include="img\004-16.png" />
+    <Resource Include="img\004-17.png" />
+    <Resource Include="img\004-18.png" />
+    <Resource Include="img\004-19.png" />
+    <Resource Include="img\004-20.png" />
+    <Resource Include="img\005-01.png" />
+    <Resource Include="img\005-02.png" />
+    <Resource Include="img\005-03.png" />
+    <Resource Include="img\005-04.png" />
+    <Resource Include="img\005-05.png" />
+    <Resource Include="img\005-06.png" />
+    <Resource Include="img\005-07.png" />
+    <Resource Include="img\005-08.png" />
+    <Resource Include="img\005-09.png" />
+    <Resource Include="img\005-10.png" />
+    <Resource Include="img\005-11.png" />
+    <Resource Include="img\005-12.png" />
+    <Resource Include="img\005-13.png" />
+    <Resource Include="img\005-14.png" />
+    <Resource Include="img\005-15.png" />
+    <Resource Include="img\005-16.png" />
+    <Resource Include="img\005-17.png" />
+    <Resource Include="img\005-18.png" />
+    <Resource Include="img\005-19.png" />
+    <Resource Include="img\005-20.png" />
+    <Resource Include="img\006-01.png" />
+    <Resource Include="img\006-02.png" />
+    <Resource Include="img\006-03.png" />
+    <Resource Include="img\006-04.png" />
+    <Resource Include="img\006-05.png" />
+    <Resource Include="img\006-06.png" />
+    <Resource Include="img\006-07.png" />
+    <Resource Include="img\006-08.png" />
+    <Resource Include="img\006-09.png" />
+    <Resource Include="img\006-10.png" />
+    <Resource Include="img\006-11.png" />
+    <Resource Include="img\006-12.png" />
+    <Resource Include="img\006-13.png" />
+    <Resource Include="img\006-14.png" />
+    <Resource Include="img\006-15.png" />
+    <Resource Include="img\006-16.png" />
+    <Resource Include="img\006-17.png" />
+    <Resource Include="img\006-18.png" />
+    <Resource Include="img\006-19.png" />
+    <Resource Include="img\006-20.png" />
+    <Resource Include="img\007-01.png" />
+    <Resource Include="img\007-02.png" />
+    <Resource Include="img\007-03.png" />
+    <Resource Include="img\007-04.png" />
+    <Resource Include="img\007-05.png" />
+    <Resource Include="img\007-06.png" />
+    <Resource Include="img\007-07.png" />
+    <Resource Include="img\007-08.png" />
+    <Resource Include="img\007-09.png" />
+    <Resource Include="img\007-10.png" />
+    <Resource Include="img\007-11.png" />
+    <Resource Include="img\007-12.png" />
+    <Resource Include="img\007-13.png" />
+    <Resource Include="img\007-14.png" />
+    <Resource Include="img\007-15.png" />
+    <Resource Include="img\007-16.png" />
+    <Resource Include="img\007-17.png" />
+    <Resource Include="img\007-18.png" />
+    <Resource Include="img\007-19.png" />
+    <Resource Include="img\007-20.png" />
+    <Resource Include="img\008-01.png" />
+    <Resource Include="img\008-02.png" />
+    <Resource Include="img\008-03.png" />
+    <Resource Include="img\008-04.png" />
+    <Resource Include="img\008-05.png" />
+    <Resource Include="img\008-06.png" />
+    <Resource Include="img\008-07.png" />
+    <Resource Include="img\008-08.png" />
+    <Resource Include="img\008-09.png" />
+    <Resource Include="img\008-10.png" />
+    <Resource Include="img\008-11.png" />
+    <Resource Include="img\008-12.png" />
+    <Resource Include="img\008-13.png" />
+    <Resource Include="img\008-14.png" />
+    <Resource Include="img\008-15.png" />
+    <Resource Include="img\008-16.png" />
+    <Resource Include="img\008-17.png" />
+    <Resource Include="img\008-18.png" />
+    <Resource Include="img\008-19.png" />
+    <Resource Include="img\008-20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\btnRecent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\DefaultTrayIcon.png" />
+    <Resource Include="img\SelectedTrayIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\000\btnRecent.png" />
+    <Resource Include="img\001\DefaultTrayIcon.png" />
+    <Resource Include="img\001\SelectedTrayIcon.png" />
+    <Resource Include="img\004\DefaultTrayIcon.png" />
+    <Resource Include="img\004\SelectedTrayIcon.png" />
+    <Resource Include="img\005\DefaultTrayIcon.png" />
+    <Resource Include="img\005\SelectedTrayIcon.png" />
+    <Resource Include="img\006\DefaultTrayIcon.png" />
+    <Resource Include="img\006\SelectedTrayIcon.png" />
+    <Resource Include="img\007\DefaultTrayIcon.png" />
+    <Resource Include="img\007\SelectedTrayIcon.png" />
+    <Resource Include="img\008\DefaultTrayIcon.png" />
+    <Resource Include="img\008\SelectedTrayIcon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

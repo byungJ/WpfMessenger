@@ -1,0 +1,900 @@
+﻿<Window x:Class="WpfNote.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:custom="clr-namespace:WpfNote.CustomCtrl"
+        xmlns:local="clr-namespace:WpfNote"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="1000" MinHeight="600" MinWidth="1000">
+    <!--<Window.Resources>
+        <local:UserListColl x:Key="UserColl"/>
+        <Style x:Key="ImgBtnStyle" TargetType="{x:Type custom:ImgBtn}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type custom:ImgBtn}">
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <Image x:Name="favorite" Source="{TemplateBinding NormalImageSrc}"></Image>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="favorite" Property="Source"
+                                Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type custom:ImgBtn}}, Path=ClickImageSrc}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="SkyBlue" Opacity="0.3"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" Value="DarkBlue"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="DarkBlue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>-->
+    <Window.Resources>
+        <local:UserListColl x:Key="UserColl"/>
+        <Style TargetType="{x:Type custom:ImgBtn}" x:Key="ImgBtnStyle">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <SolidColorBrush Color="LightGray" Opacity="0.5"></SolidColorBrush>
+                </Setter.Value>
+            </Setter>            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type custom:ImgBtn}">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <Image x:Name="img" Source="{TemplateBinding NormalImageSrc}"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="img" Property="Source" 
+                                        Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type custom:ImgBtn}}, Path=ClickImageSrc}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers >
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="LightSkyBlue" Opacity="0.3"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" Value="LightBlue"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="LightBlue"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="bigBtnStyle" TargetType="{x:Type custom:ImgBtn}" BasedOn="{StaticResource ImgBtnStyle}">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="32"/>
+        </Style>
+        <Style x:Key="smallBtnStyle" TargetType="{x:Type custom:ImgBtn}" BasedOn="{StaticResource ImgBtnStyle}">
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid x:Name="gridmain">
+        <TabControl>
+            <TabItem Header="전체쪽지함" Background="SkyBlue" Height="35" Width="110" FontSize="16">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4"/>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="290"/>
+                            <ColumnDefinition Width="4"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox SelectedIndex="0" Grid.Column="1" Height="25" VerticalAlignment="Center" Background="White" Margin="10 0 0 0">
+                            <ComboBoxItem>전체</ComboBoxItem>
+                            <ComboBoxItem>보낸사람</ComboBoxItem>
+                            <ComboBoxItem>받은사람</ComboBoxItem>
+                            <ComboBoxItem>내용</ComboBoxItem>
+                            <ComboBoxItem>첨부파일</ComboBoxItem>
+                        </ComboBox>
+
+                        <Grid Grid.Column="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="30"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBox Height="25.2" Grid.Column="0" VerticalAlignment="Center" Margin="10 0 0 0"/>
+
+                            <Button Height="25" Width="30" Grid.Column="1" x:Name="btnSearch" Click="btnSearch_Click">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                        <Image x:Name="srh" Source="/img/ico_sch_down.png" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter Property="Source" TargetName="srh" Value="/img/ico_sch_dis.png"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="LightGray" Opacity="0.8"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="Gray"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Button Height="25" Width="30" Grid.Column="2">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                        <Image x:Name="cal" Source="/img/btn_cal_normal.png" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter Property="Source" TargetName="cal" Value="/img/btn_cal_down.png"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="LightGray" Opacity="0.8"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="BorderBrush" Value="Gray"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="Gray"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </Grid>
+                        
+                        
+
+
+                        <StackPanel Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Right" Margin ="0 0 20 0" >
+
+                            <Button Width="30" Height="25" x:Name="btnRefresh" Click="btnRefresh_Click" Margin="0,2,0,0" VerticalAlignment="Top">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate  TargetType="{x:Type Button}">
+                                                    <Image x:Name="img" Source="/img/btn_renew_normal.png" Height="25" Stretch="Fill"/>
+
+                                                    <ControlTemplate.Triggers>
+                                                         <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="img" Property="Source" Value="/img/btn_renew_over.png"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter TargetName="img" Property="Source" Value="/img/btn_renew_down.png"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+
+                                                </ControlTemplate>
+
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Button Width="30" Height="25">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                        <Setter Property="BorderBrush" Value="LightGray" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate  TargetType="{x:Type Button}">
+                                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness ="{TemplateBinding BorderThickness}"  Background="{TemplateBinding Background}">
+                                                        <Image x:Name="mess" Source="/img/btn_ico_mess_normal.png" Width="24" Height="24" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter TargetName="mess" Property="Source" Value="/img/btn_ico_mess_down.png"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="SkyBlue" Opacity="0.3" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="LightSkyBlue"/>
+
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Button Width="30" Height="25">
+                                <Button.Style>
+
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="BorderBrush" Value="LightGray"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                        <Image x:Name="chet" Source="/img/btn_ico_tchet_normal.png" Width="22" Height="19" RenderOptions.BitmapScalingMode="Fant" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property ="IsPressed" Value="True">
+                                                            <Setter TargetName="chet"  Property="Source" Value="/img/btn_ico_chet_normal.png"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="SkyBlue" Opacity="0.3" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+
+                                    </Style>
+
+                                </Button.Style>
+                            </Button>
+
+                            <Button Width="30" Height="25">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="BorderBrush" Value="LightGray"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                        <Image x:Name="reply" Width="22" Height="19" Source="/img/btn_ico_reply_normal.png" VerticalAlignment="Center" HorizontalAlignment="Center" RenderOptions.BitmapScalingMode="Fant"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter TargetName="reply" Property="Source" Value="/img/btn_ico_reply_down.png"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="SkyBlue" Opacity="0.3" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Button Width="30" Height="25">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="BorderBrush" Value="LightGray"/>
+
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                                        <Image x:Name="all" Source="/img/btn_ico_allreply_normal.png" Width="22" Height="19" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter TargetName="all" Property="Source" Value="/img/btn_ico_allreply_down.png"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="SkyBlue" Opacity="0.3"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="BorderBrush" Value="LightskyBlue"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Button Width="30" Height="25">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="BorderBrush" Value="LightGray"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Width="{TemplateBinding Width}">
+                                                        <Image x:Name="repeat" Source="/img/btn_ico_repeat_normal.png" Width="22" Height="19" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter TargetName="repeat" Property="Source" Value="/img/btn_ico_repeat_down.png"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="SkyBlue" Opacity="0.3"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Button Width="30" Height="25">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="BorderBrush" Value="LightGray"/>
+
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                        <Image x:Name="delivery" Source="/img/btn_ico_delivery_normal.png" VerticalAlignment="Center" HorizontalAlignment="Center" Width="22" Height="19"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter TargetName="delivery" Property="Source" Value="/img/btn_ico_delivery_down.png"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="SkyBlue" Opacity="0.3"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Button Width="30" Height="25">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="BorderBrush" Value="LightGray"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                        <Image x:Name="delet" Source="/img/btn_ico_delet_normal.png" Width="22" Height="19" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter Property="Source" TargetName="delet" Value="/img/btn_ico_delet_down.png"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="SkyBlue" Opacity="0.3"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Button Width="30" Height="25">
+                                <Button.Style>
+                                    <Style TargetType="{x:Type Button}">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="BorderBrush" Value="LightGray"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Button}">
+                                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                        <Image x:Name="print" Source="/img/btn_ico_print_normal.png" Width="22" Height="19" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                    </Border>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsPressed" Value="True">
+                                                            <Setter TargetName="print" Property="Source" Value="/img/btn_ico_print_down.png"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background">
+                                                    <Setter.Value>
+                                                        <SolidColorBrush Color="SkyBlue" Opacity="0.3"/>
+                                                    </Setter.Value>
+
+                                                </Setter>
+                                                <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" Value="LightSkyBlue"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="3" Grid.RowSpan="3" Margin="4">
+                        <DataGrid Name="dgUsers" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                                  HorizontalGridLinesBrush="Black" VerticalGridLinesBrush="Black" 
+                                  VerticalScrollBarVisibility="Auto" SelectedCellsChanged ="dgUsers_Selected" GridLinesVisibility="None" HorizontalScrollBarVisibility="Hidden">
+                            <!-- <DataGrid.Resources>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="Black" Opacity="0.4"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGrid.Resources> -->
+                            <DataGrid.CellStyle>
+                                <Style TargetType="{x:Type DataGridCell}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="LightGray"/>
+                                            <Setter Property="BorderBrush" Value="LightGray"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="30" Binding="{Binding A}" Header="!">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                            <!--<Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="LightGray"/>
+                                                </Setter.Value>
+                                            </Setter>-->
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn Width="30" Header="F" Binding="{Binding F}">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn Width="30" Header="W" Binding="{Binding W}">
+                                    <DataGridTextColumn.HeaderStyle>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                        </Style>
+                                    </DataGridTextColumn.HeaderStyle>
+                                </DataGridTextColumn>
+
+                                <DataGridTextColumn MaxWidth="140" MinWidth="140" Header="받은/보낸 사람" Binding="{Binding Name}"/>
+                                <DataGridTextColumn MinWidth="400" Header="내용" Binding="{Binding Text}"/>
+                                <DataGridTextColumn MaxWidth="60" MinWidth="60" Header="구분" Binding="{Binding Category}"/>
+                                <DataGridTextColumn MaxWidth="330" MinWidth="330" Header="받은/보낸 시간" Binding="{Binding TimeString}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Grid>
+                    <Grid Grid.Row="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="45"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="DeepSkyBlue">보낸 사람 :</TextBlock>
+                            <Image Source="/img/김병준프로필.jpg" Width="50" Height="50"
+                                    RenderOptions.BitmapScalingMode="Fant" Stretch="UniformToFill" Grid.Column="1">
+                                <Image.Clip>
+                                    <EllipseGeometry Center="25, 25" RadiusX="22" RadiusY="22"/>
+                                </Image.Clip>
+                            </Image>
+                            <Image Grid.Column="2" Source="/img/ico_log_on.png" VerticalAlignment="Center" HorizontalAlignment="Left" Width="30" Height="30"/>
+                            <TextBlock Grid.Column="2" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="40 0 0 0">김병준(2021.12.10 9:17:39)</TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="300"/>
+                          </Grid.ColumnDefinitions>
+                            <TextBlock FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="DeepSkyBlue">받은 사람 :</TextBlock>
+                            <TextBlock Grid.Column="1" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="22,11,0,11" Width="554">청산도 산아 우뚝 솟은 푸른 산아 철철철 흐르듯 짙푸른 산아</TextBlock>
+
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin ="0 0 20 0">
+                                <!--<custom:CustomButton Width="50" Height="32" />
+                                <custom:ImageButton Width="50" Height="32"
+                                    NormalImageSrc="/img/btn_ico_favorite_cancel_dis.png"
+                                    ClickImageSrc="/img/btn_ico_favorite_normal.png"/>
+                                <custom:ImageButton Width="50" Height="32"
+                                                    NormalImageSrc="/img/ico_fontsize_normal.png"
+                                                    ClickImageSrc="/img/ico_fontsize_down.png">
+                                    <Style TargetType="{x:Type custom:ImageButton}">
+                                        <Setter Property="Background" Value="Tomato"/>
+                                    </Style>
+                                </custom:ImageButton>-->
+                                
+                                <custom:ImgBtn Style="{StaticResource bigBtnStyle}"
+                                               NormalImageSrc="/img/btn_ico_favorite_cancel_dis.png" 
+                                               ClickImageSrc="/img/btn_ico_favorite_normal.png" />
+                                <custom:ImgBtn NormalImageSrc="/img/ico_fontsize_normal.png"
+                                               ClickImageSrc="/img/ico_fontsize_down.png"
+                                               Style="{StaticResource bigBtnStyle}"/>
+                                <custom:ImgBtn NormalImageSrc="/img/btn_ico_downloadfolder_normal.png"
+                                               ClickImageSrc="/img/btn_ico_downloadfolder_down.png"
+                                               Style="{StaticResource bigBtnStyle}"/>
+                                <!--<custom:ImgBtn.Style>
+                                        <Style TargetType="{x:Type custom:ImgBtn}">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type custom:ImgBtn}">
+                                                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                                            <Image x:Name="favorite" Source="{TemplateBinding NormalImageSrc}"></Image>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsPressed" Value="True">
+                                                                <Setter TargetName="favorite" Property="Source" 
+                                                                        Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type custom:ImgBtn}}, Path=ClickImageSrc}"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background">
+                                                        <Setter.Value>
+                                                            <SolidColorBrush Color="SkyBlue" Opacity="0.3"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="LightSkyBlue"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </custom:ImgBtn.Style>-->
+
+                                <!--<Button Width="50" Height="32">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="BorderBrush" Value="Gray"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                                            <Image x:Name="favorite" Source="/img/btn_ico_favorite_cancel_dis.png"></Image>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsPressed" Value="True">
+                                                                <Setter TargetName="favorite" Property="Source" Value="/img/btn_ico_favorite_normal.png"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background">
+                                                        <Setter.Value>
+                                                            <SolidColorBrush Color="SkyBlue" Opacity="0.3"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="LightSkyBlue"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>-->
+                                
+                                <!-- 중복코드(버튼)
+                                <Button Width="50" Height="32">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="BorderBrush" Value="Gray"/>
+
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                            <Image x:Name="font" Source="/img/ico_fontsize_normal.png" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsPressed" Value="True">
+                                                                <Setter TargetName="font" Property="Source" Value="/img/ico_fontsize_down.png"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background">
+                                                        <Setter.Value> 
+                                                            <SolidColorBrush Color="SkyBlue" Opacity="0.3"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="LightSkyBlue"/>
+                                                </Trigger>
+                                                
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                                <Button Width="50" Height="32">
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <SolidColorBrush Color="LightGray" Opacity="0.4"/>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="BorderBrush" Value="Gray"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                                                            <Image x:Name="folder" Source="/img/btn_ico_downloadfolder_normal.png" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="6,0,0,0"/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsPressed" Value="True">
+                                                                <Setter TargetName="folder" Property="Source" Value="/img/btn_ico_downloadfolder_down.png"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background">
+                                                        <Setter.Value>
+                                                            <SolidColorBrush Color="SkyBlue" Opacity="0.3"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="BorderBrush" Value="LightSkyBlue"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="Background" Value="LightSkyBlue"/>
+                                              </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>-->
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Row="7">
+                        <TextBox  AcceptsReturn="True" 
+                                 VerticalScrollBarVisibility="Visible" 
+                                 TextWrapping="Wrap" Name="tbMultiLine" Text="{Binding DetailMessage}" />
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="받은쪽지함" Background="SkyBlue" Height="35" Width="110" FontSize="16">
+
+            </TabItem>
+            <TabItem Header="보낸쪽지함" Background="SkyBlue" Height="35" Width="110" FontSize="16">
+
+            </TabItem>
+            <TabItem Header="안읽은쪽지함" Background="SkyBlue" Height="35" Width="110" FontSize="16">
+
+            </TabItem>
+            <TabItem Header="관심쪽지함" Background="SkyBlue" Height="35" Width="110" FontSize="16">
+
+            </TabItem>
+            <TabItem Header="예약쪽지함" Background="SkyBlue" Height="35" Width="110" FontSize="16">
+
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="img\ico_alert.png" />
+    <None Remove="img\ico_log_busy5.png" />
+    <None Remove="img\ico_log_off.png" />
+    <None Remove="img\ico_log_on.png" />
+    <None Remove="img\img_tree_company.png" />
+    <None Remove="img\img_tree_folder.png" />
+    <None Remove="img\img_tree_folder_sele.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="img\ico_alert.png" />
+    <Resource Include="img\ico_log_busy5.png" />
+    <Resource Include="img\ico_log_off.png" />
+    <Resource Include="img\ico_log_on.png" />
+    <Resource Include="img\img_tree_company.png" />
+    <Resource Include="img\img_tree_folder.png" />
+    <Resource Include="img\img_tree_folder_sele.png" />
+  </ItemGroup>
+
+</Project>

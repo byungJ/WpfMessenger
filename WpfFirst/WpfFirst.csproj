@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="image\ico_sch_normal.png" />
+    <None Remove="김병준프로필.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="image\ico_sch_normal.png" />
+    <Resource Include="김병준프로필.jpg" />
+  </ItemGroup>
+
+</Project>

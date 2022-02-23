@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Img\ico_mess_down.png" />
+    <None Remove="Img\ico_mess_normal.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Img\ico_mess_down.png" />
+    <Resource Include="Img\ico_mess_normal.png" />
+  </ItemGroup>
+
+</Project>

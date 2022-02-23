@@ -1,0 +1,215 @@
+﻿<Window x:Class="WpfConversation.ImgWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfConversation"
+        mc:Ignorable="d"
+        Height="450" Width="450" BorderBrush="Black" BorderThickness="1">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="30"
+                          CornerRadius="0"
+                          GlassFrameThickness="0"
+                          ResizeBorderThickness="0"
+                          NonClientFrameEdges="None"/>
+
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Style x:Key="btnStyle" TargetType="{x:Type local:BtnImg}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:BtnImg}">
+                        <Image x:Name="emoticon" Source="{TemplateBinding Normal}" RenderOptions.BitmapScalingMode="Fant"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="emoticon" Property="Source" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:BtnImg}},Path=Over}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="emoticon" Property="Source" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:BtnImg}},Path=Down}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="tabStyle" TargetType="{x:Type local:TabImg}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:TabImg}">
+                        <Grid Name="Panel">
+                            <ContentPresenter ContentSource="Header" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
+                            <Image x:Name="select_emoticon" Source="{TemplateBinding Normal}" Width="62" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Grid>
+                        
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Panel" Property="Background" Value="LightGray" />
+                                <Setter TargetName="select_emoticon" Property="Source" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabImg}},Path=Down}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Panel" Property="Background" Value="White" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <Rectangle Fill="#0091EA"/>
+
+        <local:BtnImg Click="closeButton_Click" HorizontalAlignment="Right"
+                      Normal="/img/btn-ico-panel-close-normal.png"
+                      Over="/img/btn-ico-panel-close-over.png"
+                      Down="/img/btn-ico-panel-close-click.png"
+                      WindowChrome.IsHitTestVisibleInChrome="True"
+                      Style="{StaticResource btnStyle}" Width="14" Height="14"
+                      Margin="5"/>
+        
+
+
+        <TabControl x:Name="tabControl"  Grid.Row="1" TabStripPlacement="Bottom" BorderBrush="White">
+            
+            <!--<TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid Name="Panel">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"/>
+                                   
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="Background" Value="LightGray" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="White" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resource-->
+
+            <local:TabImg x:Name="tabControlRecent" Width="62" Normal="/img/000/btnRecent.png" Down="/img/000/btnRecent.png" Style="{StaticResource tabStyle}"/>
+
+
+            <local:TabImg Normal="/img/001/DefaultTrayIcon.png" Down="/img/001/SelectedTrayIcon.png" Style="{StaticResource tabStyle}" IsSelected="True">
+               
+                    <ListView x:Name="lvEmoticon13" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="White">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Width="440"></WrapPanel>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding }" Width="80" Height="80"/>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    </ListView>
+            </local:TabImg>
+
+            <local:TabImg Normal="/img/004/DefaultTrayIcon.png" Down="/img/004/SelectedTrayIcon.png" Style="{StaticResource tabStyle}" HorizontalAlignment="Left" Width="62">
+
+                <ListView x:Name="lvEmoticon4" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  BorderBrush="White">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="440"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding }" Width="80" Height="80"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </local:TabImg>
+
+            <local:TabImg Normal="/img/005/DefaultTrayIcon.png" Down="/img/005/SelectedTrayIcon.png" Style="{StaticResource tabStyle}">
+                <ListView x:Name="lvEmoticon5" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  BorderBrush="White">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="440"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding }" Width="80" Height="80"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </local:TabImg>
+
+            <local:TabImg Normal="/img/006/DefaultTrayIcon.png" Down="/img/006/SelectedTrayIcon.png" Style="{StaticResource tabStyle}">
+                <ListView x:Name="lvEmoticon6" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  BorderBrush="White">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="440"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding }" Width="80" Height="80"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </local:TabImg>
+
+            <local:TabImg Normal="/img/007/DefaultTrayIcon.png" Down="/img/007/SelectedTrayIcon.png" Style="{StaticResource tabStyle}">
+                <ListView x:Name="lvEmoticon7" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  BorderBrush="White">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="440"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding }" Width="80" Height="80"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </local:TabImg>
+
+            <local:TabImg Normal="/img/008/DefaultTrayIcon.png" Down="/img/008/SelectedTrayIcon.png" Style="{StaticResource tabStyle}">
+                <ListView x:Name="lvEmoticon8" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  BorderBrush="White">
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Width="440"></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding }" Width="80" Height="80"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </local:TabImg>
+
+        </TabControl>
+
+    </Grid>
+</Window>

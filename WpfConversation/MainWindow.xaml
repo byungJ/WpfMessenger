@@ -1,0 +1,236 @@
+﻿<Window x:Class="WpfConversation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfConversation"
+        xmlns:view="clr-namespace:WpfConversation.View"
+        mc:Ignorable="d"
+        xmlns:myNamespace="schema?conditionalMethod(parameter)"
+        x:Name="wc"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="MainWindow" Height="700" MinWidth="300"  MinHeight="700" Width="400" MaxHeight="800" MaxWidth="700"
+        KeyboardNavigation.TabNavigation="None" FocusVisualStyle="{x:Null}">
+    <Window.Resources>
+        <!--<Style TargetType="{x:Type ListBoxItem}">
+            <Style.Resources>
+                -->
+        <!-- Use your own colors here if you want, or do it per class -->
+        <!--
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FFFFA500"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey }" Color="#FFFFA500"/>
+            </Style.Resources>
+
+            <Setter Property="Template">
+                -->
+        <!-- Revert the Template in Windows 10 to match the Windows 7 template that used "SystemColors.HighlightBrushKey" and such-->
+        <!--
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true"/>
+                                    <Condition Property="Selector.IsSelectionActive" Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" TargetName="Bd" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
+        <Style TargetType="{x:Type ListViewItem}">
+            <Style.Resources>
+                <SolidColorBrush x:Key="test1231" Color="White"/>
+            </Style.Resources>
+
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListViewItem}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="Bd" Value="{StaticResource test1231}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="YourTextDataTemplate">
+            <!--<view:MiddleUserControl>
+                    <view:MiddleUserControl.Style>
+                        <Style TargetType="{x:Type view:MiddleUserControl}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ItsMe}" Value="False">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </view:MiddleUserControl.Style>
+                </view:MiddleUserControl>-->
+            <view:MiddleUserControl>
+                <view:MiddleUserControl.Style>
+                    <Style TargetType="{x:Type view:MiddleUserControl}">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ItsMe}" Value="false"/>
+                                    <Condition Binding="{Binding Type}" Value="SText"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </view:MiddleUserControl.Style>
+            </view:MiddleUserControl>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MyTextDataTemplate">
+            <view:MiddleMyUserControl >
+                <view:MiddleMyUserControl.Style>
+                    <Style TargetType="{x:Type view:MiddleMyUserControl}">
+                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding ItsMe}" Value="true"/>
+                                    <Condition Binding="{Binding Type}" Value="SText"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </view:MiddleMyUserControl.Style>
+            </view:MiddleMyUserControl>
+        </DataTemplate>
+
+        <DataTemplate x:Key="YourEmoticonDataTemplate">
+            <view:MiddleEmoticonControl>
+            <view:MiddleEmoticonControl.Style>
+                <Style TargetType="{x:Type view:MiddleEmoticonControl}">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding ItsMe}" Value="false"/>
+                                <Condition Binding="{Binding Type}" Value="Emoticon"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </view:MiddleEmoticonControl.Style>
+            </view:MiddleEmoticonControl>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MyEmoticonDataTemplate">
+            <view:MiddleMyEmoticon>
+                    <view:MiddleMyEmoticon.Style>
+                        <Style TargetType="{x:Type view:MiddleMyEmoticon}">
+                            <Setter Property="Visibility" Value="Hidden"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding ItsMe}" Value="true"/>
+                                        <Condition Binding="{Binding Type}" Value="Emoticon"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </view:MiddleMyEmoticon.Style>
+                </view:MiddleMyEmoticon>
+        </DataTemplate>
+
+        <DataTemplate x:Key="MyImgDataTemplate">
+            <view:MyUserControl/>
+        </DataTemplate>
+
+        <DataTemplate x:Key="YourImgDataTemplate">
+            <view:YourImgUserControl/>
+        </DataTemplate>
+
+        <local:PremiumUserDataTemplateSelector x:Key="myPremiumUserDataTemplateSelector" />
+        
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="170"/>
+        </Grid.RowDefinitions>
+        <view:TopUserControl Grid.Row="0"/>
+        <view:BottomUserControl x:Name="bottomUserControl" Grid.Row="2" SendChat="BottomUserControl_SendChat"/>
+        <ListView x:Name="chatListView" Grid.Row="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" BorderBrush="White" FocusVisualStyle="{x:Null}" ItemTemplateSelector="{StaticResource myPremiumUserDataTemplateSelector}"/>
+        <!--<ListViewItem>
+                <view:MiddleUserControl DataContext="{Binding ElementName=wc, Path=UserInfo}"/>
+            </ListViewItem>
+            <ListViewItem HorizontalAlignment="Right">
+                <view:MiddleMyUserControl/>
+            </ListViewItem>
+            <ListViewItem>
+                <view:MiddleUserControl DataContext="{Binding ElementName=wc, Path=UserInfo}"/>
+            </ListViewItem>
+            <ListViewItem HorizontalAlignment="Right">
+                <view:MiddleMyUserControl/>
+            </ListViewItem>
+            <ListViewItem>
+                <view:MiddleUserControl DataContext="{Binding ElementName=wc, Path=UserInfo}"/>
+            </ListViewItem>
+            <ListViewItem HorizontalAlignment="Right">
+                <view:MiddleMyUserControl/>
+            </ListViewItem>-->
+
+            <!--<ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid >
+                        <view:MiddleUserControl>
+                            <view:MiddleUserControl.Style>
+                                <Style TargetType="{x:Type view:MiddleUserControl}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ItsMe}" Value="False">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </view:MiddleUserControl.Style>
+                        </view:MiddleUserControl>
+                        <view:MiddleMyUserControl >
+                            <view:MiddleMyUserControl.Style>
+                                <Style TargetType="{x:Type view:MiddleMyUserControl}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ItsMe}" Value="true">
+                                            <Setter Property="Visibility" Value="Visible"/>                                            
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </view:MiddleMyUserControl.Style>
+                        </view:MiddleMyUserControl>
+                    </Grid>                    
+                </DataTemplate>               
+            </ListView.ItemTemplate>-->
+    </Grid>
+</Window>

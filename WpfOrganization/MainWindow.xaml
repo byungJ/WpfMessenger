@@ -1,0 +1,52 @@
+﻿<Window x:Class="WpfOrganization.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfOrganization"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Margin="10">
+        <TreeView Name="trvFamilies">
+            <ControlTemplate TargetType="TreeViewItem">
+                <Image x:Name="treeViewImg" Source="/img/ico_alert.png"/>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter TargetName="treeViewImg" Property="Source" Value="/img/img_tree_company.png" />
+                        <!--<Setter TargetName="select_emoticon" Property="Source" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:TabImg}},Path=Down}"/>-->
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="False">
+                      <!--<Setter TargetName="Panel" Property="Background" Value="White" />-->
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            <TreeView.Resources>
+                
+                <HierarchicalDataTemplate DataType="{x:Type local:Department}" ItemsSource="{Binding Teams}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/WpfOrganization;component/img/ico_alert.png" Margin="0,0,5,0" />
+                        <TextBlock Text="{Binding DepartmentName}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type local:Team}" ItemsSource="{Binding Members}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/WpfOrganization;component/img/ico_alert.png" Margin="0,0,5,0" />
+                        <TextBlock Text="{Binding TeamName}" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+                <DataTemplate DataType="{x:Type local:TeamMember}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/WpfOrganization;component/img/ico_alert.png" Margin="0,0,5,0" />
+                        <TextBlock Text=" [" Foreground="blue" />
+                        <TextBlock Text="{Binding Position}" Foreground="blue" />
+                        <TextBlock Text="]" Foreground="blue" />
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text=" ("/>
+                        <TextBlock Text="{Binding Duty}" />
+                        <TextBlock Text=")" />
+                    </StackPanel>
+                </DataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+    </Grid>
+</Window>

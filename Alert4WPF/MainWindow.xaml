@@ -1,0 +1,157 @@
+﻿<Window x:Class="Alert4WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Alert4WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="504" MaxHeight="800" MinWidth="510" MaxWidth="510" MinHeight="800" WindowStyle="SingleBorderWindow" ResizeMode="CanResize">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="81*"/>
+            <ColumnDefinition Width="187*"/>
+            <ColumnDefinition Width="137*"/>
+            <ColumnDefinition Width="36*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Grid.ColumnSpan="5" Background="LightBlue">
+            <TabItem Header="☏알림전체" Background="SkyBlue" Height="50" Width="240" Margin="10 0 0 0" FontSize="20">
+                <Grid Background="#FFE5E5E5">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="90"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Rectangle Width="0.5" Fill="Black" Grid.RowSpan="10"/>
+                    <Rectangle Grid.ColumnSpan="3" Fill="LightBlue"  Margin="0 0 0 0"/>
+                    <Rectangle Grid.Row="5"  Grid.ColumnSpan="3" Fill="LightGray"/>
+
+
+                    <Image Source="/image/messenger_label_today.png" Grid.Column="0" Grid.Row="0" Margin="0 0 6 0"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" FontSize="17" VerticalAlignment="Center">12.02 목요일</TextBlock>
+
+                    <Image Grid.Column="0" Grid.Row="1" Source="/image/mg_noti_approval_unread.png" Width="90" Height="80"/>
+                    <TextBlock FontSize="17" Foreground="White"  HorizontalAlignment="Center" VerticalAlignment="Center" >TODAY</TextBlock>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" FontSize="17" VerticalAlignment="Bottom" FontWeight="Bold">[결재수신참조] 기안자:김병준</TextBlock>
+                        <TextBlock Grid.Row="1" FontSize="17" VerticalAlignment="top">청산도 산아 우뚝 솟은 푸른 산아</TextBlock>
+                    </Grid>
+                    <TextBlock Grid.Column="2" Grid.Row="1" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 6 0">16:05</TextBlock>
+
+                    <Image Grid.Column="0" Grid.Row="2" Source="/image/mg_noti_pwreset_unread.png" Width="90" Height="80"/>
+                    <Grid Grid.Column="1" Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" FontSize="17" VerticalAlignment="Bottom" FontWeight="Bold">[비밀번호] 기안자:김병준</TextBlock>
+                        <TextBlock Grid.Row="1" FontSize="17" VerticalAlignment="top">철철철 흐르듯 짙푸른 산아</TextBlock>
+                    </Grid>
+                    <TextBlock Grid.Column="2" Grid.Row="2" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 6 0">13:05</TextBlock>
+
+                    <Image Grid.Column="0" Grid.Row="3" Source="/image/mg_noti_oneffice_read.png" Width="90" Height="80"/>
+                    <Grid Grid.Column="1" Grid.Row="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" FontSize="17" VerticalAlignment="Bottom" FontWeight="Bold">[원챔버댓글] 기안자:김병준</TextBlock>
+                        <TextBlock Grid.Row="1" FontSize="17" VerticalAlignment="top">숱한 나무들 무성히 무성히</TextBlock>
+                    </Grid>
+                    <TextBlock Grid.Column="2" Grid.Row="3" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 6 0">12:05</TextBlock>
+
+                    <Image Grid.Column="0" Grid.Row="4" Source="/image/mg_noti_report_unread.png" Width="90" Height="80"/>
+                    <Grid Grid.Column="1" Grid.Row="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" FontSize="17" VerticalAlignment="Bottom" FontWeight="Bold">[문서공유] 기안자:김병준</TextBlock>
+                        <TextBlock Grid.Row="1" FontSize="17" VerticalAlignment="top">우겨진 산마루에 금빛 기름진</TextBlock>
+                    </Grid>
+                    <TextBlock Grid.Column="2" Grid.Row="4" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 6 0">11:05</TextBlock>
+
+                    <Image Source="/image/messenger_label_day.png" Grid.Column="0" Grid.Row="5" Margin="0 0 6 0"/>
+                    <TextBlock Grid.Column="0" Grid.Row="5" FontSize="17" Foreground="White"  HorizontalAlignment="Center" VerticalAlignment="Center" >12.01</TextBlock>
+
+                    <TextBlock Grid.Column="1" Grid.Row="5" FontSize="17" VerticalAlignment="Center">수요일</TextBlock>
+
+                    <Image Grid.Column="0" Grid.Row="6" Source="/image/mg_noti_document_unread.png" Width="90" Height="80"/>
+                    <Grid Grid.Column="1" Grid.Row="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" FontSize="17" VerticalAlignment="Bottom" FontWeight="Bold">[원피스] 기안자:김병준</TextBlock>
+                        <TextBlock Grid.Row="1" FontSize="17" VerticalAlignment="top">햇살은 내려오고 둥둥 산을 넘어</TextBlock>
+                    </Grid>
+                    <TextBlock Grid.Column="2" Grid.Row="6" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 6 0">18:05</TextBlock>
+
+                    <Image Grid.Column="0" Grid.Row="4" Source="/image/mg_noti_report_unread.png" Width="90" Height="80"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="@알파멘션" HorizontalAlignment="Left" Height="50" Width="240" FontSize="20">
+                <Grid Background="#FFE5E5E5">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="90"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Rectangle Width="0.5" Fill="Black" Grid.RowSpan="10"/>
+
+                    <Image Source="/image/messenger_label_today.png" Grid.Column="0" Grid.Row="0" Margin="0 0 6 0"/>
+                    <TextBlock Grid.Column="1" Grid.Row="0" FontSize="17" VerticalAlignment="Center">12.02 목요일</TextBlock>
+
+                    <Image Grid.Column="0" Grid.Row="1" Source="/image/김병준프로필.jpg" HorizontalAlignment="Center" Width="100" Height="90"
+                   RenderOptions.BitmapScalingMode="Fant" Stretch="UniformToFill">
+                        <Image.Clip>
+                            <EllipseGeometry Center="50,50" RadiusX="40" RadiusY="40"/>
+                        </Image.Clip>
+                    </Image>
+                    <TextBlock FontSize="17" Foreground="White"  HorizontalAlignment="Center" VerticalAlignment="Center" >TODAY</TextBlock>
+                    <TextBlock FontSize="17" Foreground="White"  HorizontalAlignment="Center" VerticalAlignment="Center" >TODAY</TextBlock>
+                    <Grid Grid.Column="1" Grid.Row="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" FontSize="17" VerticalAlignment="Center" FontWeight="Bold" Margin="0 0 0 0">[일반미팅룸] 기안자:김병준</TextBlock>
+                        <Image Grid.Row="1" Source="/image/ico_chat_dis.png" HorizontalAlignment="Left" Width="30"/>
+                        <TextBlock Grid.Row="1" FontSize="17" VerticalAlignment="Center" Margin="33 0 0 0">청산도 산아 우뚝 솟은 푸른 산아</TextBlock>
+                    </Grid>
+                    <TextBlock Grid.Column="2" Grid.Row="1" FontSize="17" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 6 0">16:05</TextBlock>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
